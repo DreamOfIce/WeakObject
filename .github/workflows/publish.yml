@@ -10,15 +10,19 @@ jobs:
     name: "Build and publish to NPM"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - id: get-version
         run: |
           sudo apt install jq -y;
           echo "version=$(cat package.json | jq .version -j)" >> ${GITHUB_OUTPUT};
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
       - uses: actions/setup-node@v3
         with:
           registry-url: https://registry.npmjs.org/
-          cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: publish
         if: ${{ github.event_name == 'workflow_dispatch' || steps.get-version.outputs.version == github.ref_name }}
