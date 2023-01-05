@@ -1,6 +1,6 @@
 {
   "name": "weak-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A native-like object, but with a weak reference to all values, automatically deleting the corresponding property when the value is recycled",
   "engines": {
     "node": ">=14.6.0"
@@ -21,7 +21,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup --minify",
-    "publish": "npm run build && npm publish",
     "lint:eslint": "eslint --ext .ts --fix ./src",
     "lint:prettier": "prettier --write ."
   },
